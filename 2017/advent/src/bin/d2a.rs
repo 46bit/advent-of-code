@@ -20,7 +20,7 @@ fn d2a(input: &str) -> u32 {
 }
 
 fn matrix(digit_string: &str) -> Vec<Vec<u32>> {
-  digit_string.lines().map(|l| l.chars().filter_map(|c| c.to_digit(10)).collect()).collect()
+  digit_string.lines().map(|l| l.split_whitespace().filter_map(|c| c.parse().ok()).collect()).collect()
 }
 
 #[cfg(test)]
