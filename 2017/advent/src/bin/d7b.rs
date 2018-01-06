@@ -69,12 +69,25 @@ fn d7b(input: &str) -> String {
     while let Some(disc_name) = queue.pop_back() {
         let discs2 = discs.clone();
         let child_names = discs[&disc_name].child_names.clone();
-        let children = child_names.clone().into_iter().map(|child_name| discs[&child_name].clone());
+        let children = child_names
+            .clone()
+            .into_iter()
+            .map(|child_name| discs[&child_name].clone());
         let child_weights: HashSet<u64> = children.map(|c| c.net_weight(&discs2)).collect();
-        let children = child_names.clone().into_iter().map(|child_name| discs[&child_name].clone());
-        let children2 = child_names.clone().into_iter().map(|child_name| discs[&child_name].clone());
+        let children = child_names
+            .clone()
+            .into_iter()
+            .map(|child_name| discs[&child_name].clone());
+        let children2 = child_names
+            .clone()
+            .into_iter()
+            .map(|child_name| discs[&child_name].clone());
         if child_weights.len() > 1 {
-            println!("{:?} {:?}", children.collect::<Vec<_>>(), children2.map(|c| c.net_weight(&discs2)).collect::<Vec<_>>());
+            println!(
+                "{:?} {:?}",
+                children.collect::<Vec<_>>(),
+                children2.map(|c| c.net_weight(&discs2)).collect::<Vec<_>>()
+            );
         }
         queue.extend(child_names.into_iter());
     }
