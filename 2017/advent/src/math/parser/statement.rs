@@ -1,10 +1,7 @@
-use super::*;
+#[cfg_attr(rustfmt, rustfmt_skip)]
 
-#[derive(Debug, Clone)]
-pub enum Statement {
-  VarAssignment(Name, Expression),
-  FnDefinition(Name, Vec<Name>, Expression)
-}
+use super::*;
+use super::super::*;
 
 named!(pub statements<&[u8], Vec<Statement>>,
   many0!(ws!(call!(statement))));

@@ -2,7 +2,7 @@
 extern crate nom;
 extern crate advent;
 
-use advent::math::*;
+use advent::math::parser::*;
 
 fn main() {
   //println!("name {:?}", variable_name(b"a"));

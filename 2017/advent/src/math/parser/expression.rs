@@ -1,23 +1,8 @@
+#[cfg_attr(rustfmt, rustfmt_skip)]
+
 use super::*;
+use math::*;
 use nom::is_digit;
-
-#[derive(Debug, Clone)]
-pub struct Expression(Operand, Vec<(Operator, Operand)>);
-
-#[derive(Debug, Clone, Copy)]
-pub enum Operator {
-  Add,
-  Subtract,
-  Multiply,
-  Divide
-}
-
-#[derive(Debug, Clone)]
-pub enum Operand {
-  I64(i64),
-  VarSubstitution(Name),
-  FnApplication(Name, Vec<Expression>)
-}
 
 named!(pub expressions<&[u8], Vec<Expression>>,
   separated_list!(ws!(tag!(",")), call!(expression)));

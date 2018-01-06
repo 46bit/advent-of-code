@@ -1,8 +1,8 @@
+#[cfg_attr(rustfmt, rustfmt_skip)]
+
+use super::super::*;
 use std::string;
 use nom::is_space;
-
-#[derive(Debug, Clone)]
-pub struct Name(String);
 
 named!(pub variable_name<&[u8], Name>,
   map!(
