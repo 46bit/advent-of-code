@@ -11,7 +11,7 @@ pub use self::statement::*;
 use super::*;
 use nom::{simple_errors, IResult, Needed};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Error {
     RemainingInput(Vec<u8>, Vec<Statement>),
     Nom(simple_errors::Err<u32>),

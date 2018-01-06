@@ -3,6 +3,12 @@ pub mod executor;
 
 use std::collections::HashMap;
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Error {
+    ParseError(parser::Error),
+    ExecutionError(executor::Error),
+}
+
 pub fn interpret(s: &[u8]) -> Result<HashMap<Name, i64>, Error> {
     let statements = parser::parse(s).map_err(Error::ParseError)?;
     let results = executor::execute(statements).map_err(Error::ExecutionError)?;
@@ -12,16 +18,16 @@ pub fn interpret(s: &[u8]) -> Result<HashMap<Name, i64>, Error> {
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct Name(String);
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Statement {
     VarAssignment(Name, Expression),
     FnDefinition(Name, Vec<Name>, Expression),
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Expression(Operand, Vec<(Operator, Operand)>);
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Operator {
     Add,
     Subtract,
@@ -29,15 +35,9 @@ pub enum Operator {
     Divide,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Operand {
     I64(i64),
     VarSubstitution(Name),
     FnApplication(Name, Vec<Expression>),
-}
-
-#[derive(Debug, Clone)]
-pub enum Error {
-    ParseError(parser::Error),
-    ExecutionError(executor::Error),
 }
