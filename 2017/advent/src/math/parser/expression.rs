@@ -1,5 +1,3 @@
-#[cfg_attr(rustfmt, rustfmt_skip)]
-
 use super::*;
 use math::*;
 use nom::is_digit;

@@ -56,7 +56,9 @@ fn main() {
         _ => return,
     };
     println!("in={:?}\nout={:?}", in_, groups);
-    let stream = Stream{object: groups[0].clone()};
+    let stream = Stream {
+        object: groups[0].clone(),
+    };
     println!("{:?}", stream);
     println!("{:?}", stream.score());
     println!("{:?}", stream.length());

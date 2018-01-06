@@ -1,10 +1,8 @@
-#[cfg_attr(rustfmt, rustfmt_skip)]
-
 use super::*;
 use super::super::*;
 
 named!(pub statements<&[u8], Vec<Statement>>,
-  many0!(ws!(call!(statement))));
+  complete!(many0!(ws!(call!(statement)))));
 
 named!(pub statement<&[u8], Statement>,
   alt_complete!(
