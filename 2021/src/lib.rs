@@ -1,6 +1,7 @@
-#![feature(int_abs_diff)]
+#![feature(int_abs_diff, box_syntax)]
 
 extern crate aoc_runner;
+extern crate regex;
 
 #[macro_use]
 extern crate aoc_runner_derive;
@@ -23,5 +24,7 @@ pub mod day12;
 pub mod day13;
 pub mod day14;
 pub mod day15;
+pub mod day16;
+pub mod day17;
 
 aoc_lib! { year = 2021 }
