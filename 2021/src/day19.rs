@@ -146,22 +146,6 @@ impl Coord {
         }
     }
 
-    fn sign_variations(&self) -> Vec<Coord> {
-        let mut coords = vec![];
-        for sx in [1, -1] {
-            for sy in [1, -1] {
-                for sz in [1, -1] {
-                    coords.push(Coord {
-                        x: sx * self.x,
-                        y: sy * self.y,
-                        z: sz * self.z,
-                    });
-                }
-            }
-        }
-        return coords;
-    }
-
     fn distance_squared(&self, other: &Coord) -> u64 {
         ((other.x - self.x).pow(2) + (other.y - self.y).pow(2) + (other.z - self.z).pow(2)) as u64
     }
@@ -449,20 +433,5 @@ mod tests {
             let v = Coord { x: 1, y: 1, z: 1 };
             assert_eq!(v.apply_matrix(matrix), v);
         }
-    }
-
-    #[test]
-    fn test_coord_sign_variations() {
-        let v = Coord { x: 1, y: 1, z: 1 };
-        assert_eq!(v.sign_variations(), vec![
-            Coord { x:  1, y:  1, z:  1 },
-            Coord { x:  1, y:  1, z: -1 },
-            Coord { x:  1, y: -1, z:  1 },
-            Coord { x:  1, y: -1, z: -1 },
-            Coord { x: -1, y:  1, z:  1 },
-            Coord { x: -1, y:  1, z: -1 },
-            Coord { x: -1, y: -1, z:  1 },
-            Coord { x: -1, y: -1, z: -1 },
-        ]);
     }
 }

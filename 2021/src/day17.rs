@@ -3,8 +3,7 @@ use regex::Regex;
 // FIXME: Analyse problem properly
 
 #[aoc(day17, part1)]
-fn part1(input: &str) -> i32 {
-    return 0;
+pub fn part1(input: &str) -> i64 {
     let re = Regex::new(r"x=(?P<x1>[-0-9]+)..(?P<x2>[-0-9]+).*y=(?P<y1>[-0-9]+)..(?P<y2>[-0-9]+)")
         .unwrap();
     let caps = re.captures(input).unwrap();
@@ -31,7 +30,7 @@ fn part1(input: &str) -> i32 {
     }
     println!("best: v=({:?}) max_y={}", best_v, overall_max_y);
 
-    return 0;
+    return overall_max_y;
 }
 
 fn simulate(mut vy: i64, mut vx: i64, x1: i64, x2: i64, y1: i64, y2: i64) -> (bool, i64) {
@@ -76,7 +75,7 @@ fn simulate(mut vy: i64, mut vx: i64, x1: i64, x2: i64, y1: i64, y2: i64) -> (bo
 }
 
 #[aoc(day17, part2)]
-fn part2(input: &str) -> u64 {
+pub fn part2(input: &str) -> u64 {
     let re = Regex::new(r"x=(?P<x1>[-0-9]+)..(?P<x2>[-0-9]+).*y=(?P<y1>[-0-9]+)..(?P<y2>[-0-9]+)")
         .unwrap();
     let caps = re.captures(input).unwrap();
@@ -89,7 +88,7 @@ fn part2(input: &str) -> u64 {
     let mut uniques = 0;
     for vy in -1000..=1000 {
         for vx in -1000..=1000 {
-            let (success, max_y) = simulate(vy, vx, x1, x2, y1, y2);
+            let (success, _) = simulate(vy, vx, x1, x2, y1, y2);
             if success {
                 uniques += 1;
             }
@@ -97,4 +96,21 @@ fn part2(input: &str) -> u64 {
     }
 
     return uniques;
+}
+
+#[cfg(test)]
+mod tests {
+    pub use super::*;
+
+    const INPUT: &str = include_str!("../input/2021/day17.txt");
+
+    #[test]
+    fn test_part1() {
+        assert_eq!(part1(INPUT), 35511);
+    }
+
+    #[test]
+    fn test_part2() {
+        assert_eq!(part2(INPUT), 3282);
+    }
 }
